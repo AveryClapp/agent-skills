@@ -1,12 +1,33 @@
 ---
 name: agentic-engineering
-description: Coordinate substantial engineering work with Beads, Git worktrees, workmux, tmux, Agent Mail, independent review, and verification. Use when planning or running parallel agents, delegating tasks, resuming long work, reviewing an agent branch, or landing completed work.
+description: Enforce Beads as the centralized task, bug, dependency, and memory control plane while coordinating substantial engineering work with Git worktrees, workmux, tmux, Agent Mail, independent review, and verification. Use when starting or tracking work, discovering bugs, planning or running parallel agents, delegating tasks, resuming work, reviewing an agent branch, or landing completed work.
 ---
 
 # Agentic Engineering
 
 Use the repository's local instructions first. This skill supplies the common
 coordination workflow, not project-specific commands.
+
+## Use Beads As The Control Plane
+
+When `.beads/` exists, Beads is authoritative for tasks, bugs, priorities,
+dependencies, follow-ups, and durable memory. Do not maintain a competing task
+list in markdown, agent-local tools, or chat context.
+
+1. Run `bd prime` at session start.
+2. Create and claim a Bead before substantial work when no task exists yet.
+3. Immediately create a bug Bead for every discovered defect, even if it will be
+   fixed in the current session:
+
+```bash
+bd create "Bug: <concise title>" -t bug \
+  --deps discovered-from:<current-id>
+```
+
+4. Close the bug only after its fix is verified. Record deferred work as another
+   Bead and durable knowledge with `bd remember`.
+5. Do not initialize Beads in a repository that lacks `.beads/` without explicit
+   operator or repository direction.
 
 ## Choose The Smallest Workflow
 
@@ -37,7 +58,7 @@ Create an isolated worktree with the Bead ID as its handle:
 agent-new <id>
 ```
 
-For work without a Bead:
+For a repository that has not adopted Beads:
 
 ```bash
 agent-new <branch> --prompt "Concrete objective and acceptance criteria"
@@ -48,6 +69,10 @@ agent-new <branch> --prompt "Concrete objective and acceptance criteria"
 - State the files or modules the task owns.
 - Reserve those paths through Agent Mail when it is running.
 - Use the Bead ID as the Agent Mail thread ID.
+- Create child Beads with `--parent <id>` before dispatching independent workers.
+- Launch Claude or Codex children with
+  `agent new <child-id> --agent <name> --background`; each child gets an
+  independent worktree and model context.
 - Send decisions, blockers, and interface changes to the thread.
 - Release reservations when work stops or ownership changes.
 
@@ -65,7 +90,9 @@ agent-review <branch>
 ```
 
 The reviewer should report concrete findings with file and line references. It
-must not edit the implementation branch unless explicitly asked.
+must not edit the implementation branch unless explicitly asked. In a Beads
+repository, it creates a bug Bead for every actionable finding before reporting
+the finding and its Bead ID.
 
 ## Finish
 
