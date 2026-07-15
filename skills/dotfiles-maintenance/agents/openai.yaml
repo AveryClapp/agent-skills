@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dotfiles Maintenance"
+  short_description: "Maintain and validate portable dotfiles safely"
+  default_prompt: "Use $dotfiles-maintenance to audit, update, sync, and verify this dotfiles setup."
