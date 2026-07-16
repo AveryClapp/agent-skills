@@ -25,3 +25,7 @@ For automation, use tmux hooks, `wait-for`, pane user options, or control mode.
 Do not synchronize agent startup with arbitrary sleeps or infer completion only
 from screen text.
 
+When NTM is installed, prefer its status, activity, health, dashboard, and robot
+surfaces for fleet-level observation. Continue to use workmux for worktree
+lifecycle and stable pane IDs for low-level recovery or evidence capture. NTM
+must not become a competing task store beside Beads.

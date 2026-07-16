@@ -1,6 +1,6 @@
 ---
 name: agentic-engineering
-description: Enforce Beads as the centralized task, bug, dependency, and memory control plane while coordinating substantial engineering work with Git worktrees, workmux, tmux, Agent Mail, independent review, and verification. Use when starting or tracking work, discovering bugs, planning or running parallel agents, delegating tasks, resuming work, reviewing an agent branch, or landing completed work.
+description: Enforce Beads as the centralized task, bug, dependency, and memory control plane while coordinating substantial engineering work with Git worktrees, workmux, tmux, NTM operator surfaces, Agent Mail, independent review, and verification. Use when starting or tracking work, discovering bugs, planning or running parallel agents, delegating tasks, supervising agents or panes, resuming work, reviewing an agent branch, or landing completed work.
 ---
 
 # Agentic Engineering
@@ -78,6 +78,22 @@ agent-new <branch> --prompt "Concrete objective and acceptance criteria"
 
 See [references/beads-and-mail.md](references/beads-and-mail.md) for the
 coordination contract.
+
+## Operate With NTM
+
+When NTM is installed, use it as an operator surface for named tmux sessions:
+session visibility, dashboards, activity and health checks, pane messaging, and
+robot snapshots. Keep the ownership boundaries unchanged:
+
+- Beads owns tasks, assignment, dependencies, follow-ups, and durable memory.
+- workmux owns per-agent worktrees, branch landing, and cleanup.
+- Agent Mail owns coordination messages and advisory reservations.
+- NTM observes and controls tmux panes; it is not a second task tracker.
+
+Do not use NTM spawning, assignment, pipelines, or checkpoints for Beads-driven
+work unless the operator or repository has explicitly adopted an
+isolation-compatible NTM workflow. Never place independent agents in one mutable
+working tree merely to obtain a shared dashboard.
 
 ## Verify And Review
 
