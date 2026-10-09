@@ -8,7 +8,6 @@ their upstream repositories.
 
 | Skill | Purpose |
 |---|---|
-| `agentic-engineering` | Beads, workmux, worktrees, tmux, Agent Mail, review, and landing |
 | `dotfiles-maintenance` | Safe dotfiles audits, profile changes, sync, performance diagnosis, and verification |
 
 ## Install

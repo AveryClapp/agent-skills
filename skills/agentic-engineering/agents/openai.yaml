@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agentic Engineering"
-  short_description: "Coordinate isolated multi-agent engineering work"
-  default_prompt: "Use $agentic-engineering to track this work in Beads and coordinate the smallest effective agent workflow."
